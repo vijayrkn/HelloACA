@@ -23,6 +23,6 @@ jobs:
       uses: azure/container-apps-deploy-action@v0
       with:
         appSourcePath: ${{ github.workspace }}
-        acrName: vramakregistry
-        containerAppName: vramakcreatedcontainerapp
+        acrName: vramakacr
+        containerAppName: vramaknewaca
         resourceGroup: vramakrg
