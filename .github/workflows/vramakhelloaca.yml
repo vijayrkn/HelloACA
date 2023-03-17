@@ -1,0 +1,29 @@
+name: Build and deploy .NET application to container app vramakhelloaca
+on:
+  push:
+    branches:
+    - main
+env:
+  CONTAINER_REGISTRY_LOGIN_SERVER: vramakregistry.azurecr.io
+  DOTNET_CORE_VERSION: 7.0.x
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Log in to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Build and deploy Container App
+      uses: azure/container-apps-deploy-action@v0
+      with:
+        appSourcePath: ${{ github.workspace }}
+        acrName: vramakregistry
+        containerAppName: vramakcreatedcontainerapp
+        resourceGroup: vramakrg
